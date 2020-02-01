@@ -105,13 +105,13 @@
             "size": 10,
             "score": 0.2,
             "id": "Chenjesu",
-            "type": "circle"
+            "type": "diamond"
         },
         {
             "size": 60,
             "score": 0.4,
             "id": "Ilwrath",
-            "type": "circle"
+            "type": "diamond"
         },
         {
             "size": 10,

@@ -50,7 +50,7 @@
 
     var default_node_color = "#ccc";
     //var default_node_color = "rgb(3,190,100)";
-    var default_link_color = "#888";
+    var default_link_color = "#345682";
     var nominal_base_node_size = 8;
     var nominal_text_size = 10;
     var max_text_size = 24;
@@ -59,12 +59,14 @@
     var max_base_node_size = 36;
     var min_zoom = 0.1;
     var max_zoom = 7;
+
+
     var svg = d3.select("body").append("svg");
     var zoom = d3.behavior.zoom().scaleExtent([min_zoom, max_zoom])
     var g = svg.append("g");
     svg.style("cursor", "move");
 
-    d3.json("./graph.json", function (error, graph) {
+    d3.json("https://raw.githubusercontent.com/Mosqidiot/sheep_data/master/app/sheep.json", function (error, graph) {
 
         var linkedByIndex = {};
         graph.links.forEach(function (d) {
@@ -99,6 +101,18 @@
                 else return default_link_color;
             })
 
+        svg.selectAll(".link")
+            .data(graph.links) // Different link/path types can be defined here
+            .enter().append("svg:marker") // This section adds in the arrows
+            .attr("id", String)
+            .attr("viewBox", "0 -5 10 10")
+            .attr("refX", 15)
+            .attr("refY", -1.5)
+            .attr("markerWidth", 6)
+            .attr("markerHeight", 6)
+            .attr("orient", "auto")
+            .append("path")
+            .attr("d", "M0,-5L10,0L0,5");
 
         var node = g.selectAll(".node")
             .data(graph.nodes)
@@ -290,8 +304,7 @@
         svg.call(zoom);
 
         resize();
-        //window.focus();
-        d3.select(window).on("resize", resize).on("keydown", keydown);
+
 
         force.on("tick", function () {
 
@@ -334,7 +347,6 @@
             w = width;
             h = height;
         }
-
 
         function vis_by_type(type) {
             switch (type) {
