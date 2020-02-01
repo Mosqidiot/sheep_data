@@ -1302,10 +1302,6 @@
             "size": 20,
             "age": 9,
             "id": 28
-        },
-        {
-            "id": "SheepName",
-            "type": "square"
         }
     ],
     "directed": true,
